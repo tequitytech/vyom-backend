@@ -1,0 +1,223 @@
+openapi: "3.0.2"
+info:
+  title: Vyom
+  version: "1.0"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      description: "#### Example: Bearer [TOKEN]"
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: hiren@mailinator.com
+        otp:
+          type: integer
+          example: 9564
+      required:
+        - email
+        - otp
+
+  responses:
+    Success:
+      description: success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: success
+
+paths:
+  /auth/login:
+    post:
+      summary: Register - Login service
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: hiren
+                email:
+                  type: string
+                  format: email
+                  example: hiren@mailinator.com
+              required:
+                - email
+                - name
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
+  /auth/guest/login:
+    post:
+      summary: Guest - Login service
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deviceId:
+                  type: string
+                  example: asghjdgajhksdasju
+
+              required:
+                - deviceId
+
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
+  /auth/otp/verify:
+    post:
+      summary: Otp verification
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Login"
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
+  /auth/refresh-token:
+    post:
+      summary: Refresh token service
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+                  example: G4urR2TanUp92389lpvcN9a3oxeZMNnxzmn45iX764inPBl5r39EMhHFViexrBVNVI8NeKA8AtD
+              required:
+                - refreshToken
+
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
+  /auth/logout:
+    post:
+      description: Logout
+      summary: Logout
+      tags:
+        - Auth
+
+      security:
+        - bearerAuth: []
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+                  example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzM3NDAxMjI3OGEzMGRiODUyYTM1N2MiLCJpYXQiOjE3MzE2Nzc5ODUsImV4cCI6MTczMjI4Mjc4NX0.yUkxGyGn-8ljEEjjEoSi5H2P_CocV2ptaMRCQz7O4Dw
+
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
+  /user/profile:
+    get:
+      description: Profile
+      summary: Profile
+      tags:
+        - User
+
+      security:
+        - bearerAuth: []
+
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
+  /themes:
+    get:
+      description: Get All Themes
+      summary: Get All Themes
+      tags:
+        - Themes
+
+      security:
+        - bearerAuth: []
+
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
+  /themes/{id}:
+    get:
+      description: Get Theme by documentId
+      summary: Get Theme by documentId
+      tags:
+        - Themes
+
+      security:
+        - bearerAuth: []
+
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: yl75z41kxc2buwv3sdwqv8r9
+
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
+  /modules:
+    get:
+      description: Get modules or by documentId
+      summary: Get modules or by documentId
+      tags:
+        - Modules
+
+      security:
+        - bearerAuth: []
+
+      parameters:
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: string
+            example: yl75z41kxc2buwv3sdwqv8r9
+
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"

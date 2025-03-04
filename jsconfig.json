@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "checkJs": true, // Enables checking for missing functions
+    "allowJs": true,
+    "noEmit": true // Prevents any compilation
+  },
+  "include": ["src/**/*.js"]
+}
