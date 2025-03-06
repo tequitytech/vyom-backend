@@ -166,8 +166,8 @@ paths:
 
   /themes:
     get:
-      description: Get All Themes
-      summary: Get All Themes
+      summary: Retrieve All Themes
+      description: Fetches a list of all available themes.
       tags:
         - Themes
 
@@ -180,8 +180,8 @@ paths:
 
   /themes/{id}:
     get:
-      description: Get Theme by documentId
-      summary: Get Theme by documentId
+      summary: Retrieve Theme Details by Document ID
+      description: Fetches theme details, including related modules, chapters, and images, based on the provided document ID.
       tags:
         - Themes
 
@@ -192,6 +192,7 @@ paths:
         - name: id
           in: path
           required: true
+          description: Unique identifier of the theme document
           schema:
             type: string
             example: yl75z41kxc2buwv3sdwqv8r9
@@ -202,10 +203,11 @@ paths:
 
   /modules:
     get:
-      description: Get modules or by documentId
-      summary: Get modules or by documentId
+      description: Get modules or details by documentId
+      summary: Get modules or details by documentId
       tags:
         - Modules
+      deprecated: true
 
       security:
         - bearerAuth: []
@@ -214,6 +216,29 @@ paths:
         - name: id
           in: query
           required: false
+          schema:
+            type: string
+            example: yl75z41kxc2buwv3sdwqv8r9
+
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
+  /chapters/{id}:
+    get:
+      description: Get chapters or chapter details by documentId
+      summary: Get chapters or chapter details by documentId
+      tags:
+        - Chapters
+
+      security:
+        - bearerAuth: []
+
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of the chapter document
           schema:
             type: string
             example: yl75z41kxc2buwv3sdwqv8r9

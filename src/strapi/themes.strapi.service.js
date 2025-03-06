@@ -16,10 +16,25 @@ export const fetchThemes = async () => {
 
 export const fetchThemeById = async (id) => {
   try {
-    const response = await axios.get(
-      getStrapiEndpoint(ENDPOINTS.THEMES) + `/${id}` + "?populate=modules"
-    );
-    return response.data;
+    const url = `${getStrapiEndpoint(ENDPOINTS.THEMES)}/${id}`;
+    const { data } = await axios.get(url, {
+      params: {
+        populate: {
+          modules: {
+            populate: {
+              chapters: {
+                populate: {
+                  image: {
+                    fields: ["url"], // Fetch only URL if needed
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+    return data;
   } catch (error) {
     console.log(error?.response);
     throw new GeneralError(

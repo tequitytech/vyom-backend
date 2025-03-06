@@ -7,6 +7,8 @@ const STRAPI_BASE_URL =
 const ENDPOINTS = {
   THEMES: "themes",
   MODULES: "modules",
+  PAGES: "pages",
+  CHAPTERS: "chapters",
 };
 
 // Function to construct API URL with dynamic params
