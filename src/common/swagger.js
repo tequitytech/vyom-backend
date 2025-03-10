@@ -11,9 +11,11 @@ const routes = express.Router();
 routes.use(
   "/api/documentation",
   (req, res, next) => {
+    const swaggerBaseUrl = apiBaseUrl();
+    console.log("Swagger Base URL:", swaggerBaseUrl); // Debugging
     swaggerDocument.servers = [
       {
-        url: apiBaseUrl(),
+        url: swaggerBaseUrl,
         description: "API base url",
       },
     ];
