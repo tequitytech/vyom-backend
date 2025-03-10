@@ -25,10 +25,11 @@ routes.use(
   },
   swaggerUi.serve,
   (req, res, next) => {
-    swaggerUi.setup(req.swaggerDoc, {
+    swaggerUi.setup(swaggerDocument, {
       swaggerOptions: {
         persistAuthorization: true,
         docExpansion: "none",
+        cacheControl: false, // Disable caching
       },
     })(req, res, next);
   }
