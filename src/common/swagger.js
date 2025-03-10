@@ -20,7 +20,7 @@ routes.use(
       servers: [{ url: swaggerBaseUrl, description: "API base url" }],
     };
 
-    req.swaggerDoc = swaggerDocCopy;
+    // req.swaggerDoc = swaggerDocCopy;
     next();
   },
   swaggerUi.serve,

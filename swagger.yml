@@ -3,6 +3,12 @@ info:
   title: Vyom
   version: "1.0"
 
+servers:
+  - url: https://vyombkstg.edemo.site/api/v1
+    description: Testing Server
+  - url: http://localhost:3000/api/v1
+    description: Local Development Server
+
 components:
   securitySchemes:
     bearerAuth:
