@@ -13,22 +13,25 @@ routes.use(
   (req, res, next) => {
     const swaggerBaseUrl = apiBaseUrl();
     console.log("Swagger Base URL:", swaggerBaseUrl); // Debugging
-    swaggerDocument.servers = [
-      {
-        url: swaggerBaseUrl,
-        description: "API base url",
-      },
-    ];
-    req.swaggerDoc = swaggerDocument;
+
+    // Create a fresh copy of swaggerDocument every request
+    const swaggerDocCopy = {
+      ...swaggerDocument,
+      servers: [{ url: swaggerBaseUrl, description: "API base url" }],
+    };
+
+    req.swaggerDoc = swaggerDocCopy;
     next();
   },
   swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, {
-    swaggerOptions: {
-      persistAuthorization: true,
-      docExpansion: "none",
-    },
-  })
+  (req, res, next) => {
+    swaggerUi.setup(req.swaggerDoc, {
+      swaggerOptions: {
+        persistAuthorization: true,
+        docExpansion: "none",
+      },
+    })(req, res, next);
+  }
 );
 
 module.exports = routes;
