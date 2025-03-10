@@ -15,9 +15,7 @@ export const fetchChapterAndTheirPages = async (id = null) => {
         },
         pages: {
           populate: {
-            video_urls: {
-              fields: ["url"], // Fetch only the URL field from video
-            },
+            video_urls: "*",
             image_urls: {
               fields: ["url"], // Fetch only the URL field from image
             },
