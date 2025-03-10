@@ -6,8 +6,8 @@ module.exports = {
   },
 
   apiBaseUrl(path = null) {
-    if (process.env.IS_SECURE === "true") {
-      let url = `https://${process.env.HOST}/api/v1`;
+    if (process.env.USE_SERVER_MANAGED_SSL === "true") {
+      let url = `${process.env.BASE_URL}/api/v1`;
       return url + (path ? `/${path}` : "");
     }
 
