@@ -5,6 +5,7 @@ import themeRoutes from "../src/apis/themes/themes.router";
 import moduleRoutes from "../src/apis/modules/modules.router";
 import chapterRoutes from "../src/apis/chapters/chapters.router";
 import pageRoutes from "../src/apis/pages/pages.router";
+import journeyRoutes from "../src/apis/journeys/journey.router";
 
 const routes = express.Router();
 
@@ -15,5 +16,6 @@ routes.use("/themes", themeRoutes);
 routes.use("/modules", moduleRoutes);
 routes.use("/chapters", chapterRoutes);
 routes.use("/pages", pageRoutes);
+routes.use("/journey", journeyRoutes);
 
 module.exports = routes;

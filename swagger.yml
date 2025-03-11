@@ -195,7 +195,80 @@ paths:
           description: Unique identifier of the theme document
           schema:
             type: string
-            example: yl75z41kxc2buwv3sdwqv8r9
+            example: ermegeyomkdcbx90t1h3cepf
+
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
+  /pages/{chapterId}:
+    get:
+      description: Get pages or pages details by documentId By chapterId
+      summary: Get pages or pages details by documentId By chapterId
+      tags:
+        - Pages
+
+      security:
+        - bearerAuth: []
+
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          description: Unique identifier of the chapter document
+          schema:
+            type: string
+            example: o4hlnsuw3p3q1ry13c5twr5z
+        - name: pageId
+          in: query
+          required: false
+          description: Unique identifier of the page document
+          schema:
+            type: string
+
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
+  /journey:
+    post:
+      summary: Add User Journey
+      description: |
+        This endpoint allows users to submit their journey progress by providing the page ID, question ID, selected answer options, and any custom input text. 
+        The request requires authentication via a Bearer token.
+      tags:
+        - Journey
+
+      security:
+        - bearerAuth: []
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageId:
+                  type: string
+                  example: "asghjdgajhksdasju"
+                  description: "Unique identifier for the page."
+                questionId:
+                  type: string
+                  example: "q12345"
+                  description: "Unique identifier for the question."
+                answerOptionId:
+                  type: array
+                  items:
+                    type: string
+                  description: "Array of selected answer option IDs."
+                customInputText:
+                  type: string
+                  example: "User's custom response."
+                  description: "Custom text input provided by the user."
+
+              required:
+                - pageId
 
       responses:
         "200":
@@ -207,7 +280,7 @@ paths:
       summary: Get modules or details by documentId
       tags:
         - Modules
-      deprecated: true
+      deprecated: false
 
       security:
         - bearerAuth: []

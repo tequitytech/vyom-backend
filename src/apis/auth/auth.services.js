@@ -42,7 +42,7 @@ class authServices {
 
     let user = await User.findOne({ deviceId });
     if (!user) {
-      user = await User.create({ deviceId });
+      user = await User.create({ deviceId, isGuestUser: true });
     }
 
     const accessToken = await authHelper.generateAccessToken({
