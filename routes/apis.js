@@ -6,6 +6,7 @@ import moduleRoutes from "../src/apis/modules/modules.router";
 import chapterRoutes from "../src/apis/chapters/chapters.router";
 import pageRoutes from "../src/apis/pages/pages.router";
 import journeyRoutes from "../src/apis/journeys/journey.router";
+import onboardingRoutes from "../src/apis/onboarding/onboarding.router";
 
 const routes = express.Router();
 
@@ -17,5 +18,6 @@ routes.use("/modules", moduleRoutes);
 routes.use("/chapters", chapterRoutes);
 routes.use("/pages", pageRoutes);
 routes.use("/journey", journeyRoutes);
+routes.use("/onboarding", onboardingRoutes);
 
 module.exports = routes;

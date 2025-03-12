@@ -39,6 +39,17 @@ components:
                 example: success
 
 paths:
+  /onboarding:
+    get:
+      summary: Retrieve All Onboarding data
+      description: Fetches a list of all available Onboarding data.
+      tags:
+        - Onboarding
+
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
   /auth/login:
     post:
       summary: Register - Login service

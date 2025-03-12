@@ -9,6 +9,8 @@ const ENDPOINTS = {
   MODULES: "modules",
   PAGES: "pages",
   CHAPTERS: "chapters",
+  ONBOARDINGS: "onboardings",
+  SURVEYS: "surveys",
 };
 
 // Function to construct API URL with dynamic params
