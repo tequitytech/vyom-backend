@@ -1,5 +1,8 @@
 import pageServices from "./pages.services";
-import PageResource from "./resources/page.resource";
+import {
+  PageResource,
+  PageResourceUserInteraction,
+} from "./resources/page.resource";
 
 class pageController {
   /**
@@ -17,7 +20,11 @@ class pageController {
     return res.send({
       success: true,
       message: "Page fetched successfully",
-      ...new PageResource(data),
+      data: new PageResource(data),
+      meta: data?.meta,
+      pageUserInteraction: new PageResourceUserInteraction(
+        data?.pageUserInteraction
+      ),
     });
   }
 }

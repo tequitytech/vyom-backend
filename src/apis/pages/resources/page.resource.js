@@ -1,4 +1,4 @@
-export default class PageResource {
+export class PageResource {
   constructor(data) {
     this.id = data?.id;
     this.documentId = data?.documentId;
@@ -13,7 +13,6 @@ export default class PageResource {
     this.position = data?.position;
     this.questions = data?.questions?.map((q) => new QuestionResource(q)) || [];
     this.next_page = data?.next_page;
-    this.meta = data?.meta;
   }
 }
 
@@ -36,5 +35,13 @@ class OptionResource {
     this.type = data?.type;
     this.image = data?.image;
     this.next_page = data?.next_page?.documentId;
+  }
+}
+
+export class PageResourceUserInteraction {
+  constructor(data) {
+    this._id = data?._id;
+    this.answerOptionId = data?.answerOptionId;
+    this.customInputText = data?.customInputText;
   }
 }

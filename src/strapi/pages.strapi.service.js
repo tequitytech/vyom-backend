@@ -8,7 +8,13 @@ export const fetchPages = async (chapterId, id = null) => {
 
     let QUERY_PARAMS = {
       populate: {
-        video_urls: "*",
+        video_urls: {
+          populate: {
+            thumbnail: {
+              fields: ["url"], // Ensure only the 'url' field of thumbnail is fetched
+            },
+          },
+        },
         image_urls: {
           fields: ["url"], // Fetch only the URL field from image
         },

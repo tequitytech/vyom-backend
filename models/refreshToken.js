@@ -24,6 +24,6 @@ refreshTokenSchema.methods.isExpired = function () {
   return Date.now() > this.expiresAt.getTime();
 };
 
-const RefreshToken = mongoose.model("RefreshToken", refreshTokenSchema);
+const RefreshToken = mongoose.model("refresh_token", refreshTokenSchema);
 
 export default RefreshToken;

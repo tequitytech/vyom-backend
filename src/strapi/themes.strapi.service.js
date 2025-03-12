@@ -34,7 +34,7 @@ export const fetchThemeById = async (id) => {
         },
       },
     });
-    return data;
+    return data.data;
   } catch (error) {
     console.log(error?.response);
     throw new GeneralError(

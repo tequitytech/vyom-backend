@@ -274,48 +274,79 @@ paths:
         "200":
           $ref: "#/components/responses/Success"
 
-  /modules:
-    get:
-      description: Get modules or details by documentId
-      summary: Get modules or details by documentId
+  /journey/chapter-complete:
+    post:
+      summary: Add User Journey When Chapter complete
+      description: |
+        This endpoint records the user's progress when they complete a chapter. 
+        It requires the `chapterId` to identify the completed chapter.
       tags:
-        - Modules
-      deprecated: false
+        - Journey
 
       security:
         - bearerAuth: []
 
-      parameters:
-        - name: id
-          in: query
-          required: false
-          schema:
-            type: string
-            example: yl75z41kxc2buwv3sdwqv8r9
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chapterId:
+                  type: string
+                  example: "asghjdgajhksdasju"
+                  description: "Unique identifier for the page."
+
+              required:
+                - chapterId
 
       responses:
         "200":
           $ref: "#/components/responses/Success"
 
-  /chapters/{id}:
-    get:
-      description: Get chapters or chapter details by documentId
-      summary: Get chapters or chapter details by documentId
-      tags:
-        - Chapters
+  # /modules:
+  #   get:
+  #     description: Get modules or details by documentId
+  #     summary: Get modules or details by documentId
+  #     tags:
+  #       - Modules
+  #     deprecated: false
 
-      security:
-        - bearerAuth: []
+  #     security:
+  #       - bearerAuth: []
 
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: Unique identifier of the chapter document
-          schema:
-            type: string
-            example: yl75z41kxc2buwv3sdwqv8r9
+  #     parameters:
+  #       - name: id
+  #         in: query
+  #         required: false
+  #         schema:
+  #           type: string
+  #           example: yl75z41kxc2buwv3sdwqv8r9
 
-      responses:
-        "200":
-          $ref: "#/components/responses/Success"
+  #     responses:
+  #       "200":
+  #         $ref: "#/components/responses/Success"
+
+  # /chapters/{id}:
+  # get:
+  #   description: Get chapters or chapter details by documentId
+  #   summary: Get chapters or chapter details by documentId
+  #   tags:
+  #     - Chapters
+
+  #   security:
+  #     - bearerAuth: []
+
+  #   parameters:
+  #     - name: id
+  #       in: path
+  #       required: true
+  #       description: Unique identifier of the chapter document
+  #       schema:
+  #         type: string
+  #         example: yl75z41kxc2buwv3sdwqv8r9
+
+  #   responses:
+  #     "200":
+  #       $ref: "#/components/responses/Success"

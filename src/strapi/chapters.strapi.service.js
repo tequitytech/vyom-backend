@@ -35,11 +35,16 @@ export const fetchChapterAndTheirPages = async (id = null) => {
             },
           },
         },
+        module: {
+          populate: {
+            theme: { fields: ["documentId"] }, // Ensure themes are properly populated
+          },
+        },
       },
     };
 
     const response = await axios.get(endpoint, { params: QUERY_PARAMS });
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error(
       "Error fetching chapters:",

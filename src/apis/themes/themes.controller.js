@@ -27,7 +27,7 @@ class themeControllers {
     return res.send({
       success: true,
       message: "Themes fetched successfully",
-      ...data,
+      data: data,
     });
   }
 }

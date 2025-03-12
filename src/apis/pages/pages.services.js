@@ -1,3 +1,4 @@
+import Journey from "../../../models/journey";
 import { BadRequestException } from "../../common/exceptions/errorException";
 import { fetchPages } from "../../strapi/pages.strapi.service";
 
@@ -29,7 +30,7 @@ class pageServices {
    * @param {*} pageId
    * @returns
    */
-  static getSpecificPage(pages, pageId) {
+  static async getSpecificPage(pages, pageId) {
     const pageIndex = pages.data.findIndex(
       (page) => page.documentId === pageId
     );
@@ -38,10 +39,16 @@ class pageServices {
     }
 
     const page = pages.data[pageIndex];
+    const pageUserInteraction = await Journey.findOne({ pageId })
+      .sort({
+        createdAt: -1,
+      })
+      .exec();
     return {
       ...page,
       next_page: this.findNextPageId(pages.data, pageIndex),
       meta: { pagination: { ...pages.meta.pagination, page: pageIndex + 1 } },
+      pageUserInteraction,
     };
   }
 
@@ -50,11 +57,19 @@ class pageServices {
    * @param {*} pages
    * @returns
    */
-  static getFirstPage(pages) {
+  static async getFirstPage(pages) {
     const firstPage = pages.data[0];
+    const pageUserInteraction = await Journey.findOne({
+      pageId: firstPage.documentId,
+    })
+      .sort({
+        createdAt: -1,
+      })
+      .exec();
     return {
       ...firstPage,
       next_page: this.findNextPageId(pages.data, 0),
+      pageUserInteraction,
       meta: pages.meta,
     };
   }
