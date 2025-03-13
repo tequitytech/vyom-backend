@@ -18,10 +18,10 @@ class pageServices {
     }
 
     if (pageId) {
-      return this.getSpecificPage(pages, pageId);
+      return this.getSpecificPage(pages, pageId, user);
     }
 
-    return this.getFirstPage(pages);
+    return this.getFirstPage(pages, user);
   }
 
   /**
@@ -30,7 +30,7 @@ class pageServices {
    * @param {*} pageId
    * @returns
    */
-  static async getSpecificPage(pages, pageId) {
+  static async getSpecificPage(pages, pageId, user) {
     const pageIndex = pages.data.findIndex(
       (page) => page.documentId === pageId
     );
@@ -39,7 +39,10 @@ class pageServices {
     }
 
     const page = pages.data[pageIndex];
-    const pageUserInteraction = await Journey.findOne({ pageId })
+    const pageUserInteraction = await Journey.findOne({
+      pageId,
+      userId: user._id,
+    })
       .sort({
         createdAt: -1,
       })
@@ -57,10 +60,11 @@ class pageServices {
    * @param {*} pages
    * @returns
    */
-  static async getFirstPage(pages) {
+  static async getFirstPage(pages, user) {
     const firstPage = pages.data[0];
     const pageUserInteraction = await Journey.findOne({
       pageId: firstPage.documentId,
+      userId: user._id,
     })
       .sort({
         createdAt: -1,

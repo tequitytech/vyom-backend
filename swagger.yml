@@ -161,6 +161,59 @@ paths:
         "200":
           $ref: "#/components/responses/Success"
 
+  /surveys:
+    get:
+      summary: Retrieve All survey data
+      description: Fetches a list of all available survey data.
+      tags:
+        - Survey
+
+      security:
+        - bearerAuth: []
+
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
+    post:
+      summary: Add user survey
+      description: |
+        This endpoint allows users to submit their survey progress by survey ID, selected answer options. 
+        The request requires authentication via a Bearer token.
+      tags:
+        - Survey
+
+      security:
+        - bearerAuth: []
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                surveyId:
+                  type: string
+                  description: "Unique identifier for the survey."
+                  example: "asdasd2323dfs"
+                answers:
+                  type: array
+                  items:
+                    type: string
+                  description: "Array of selected answer option text."
+                  example: ["Yes", "Maybe"]
+                isSkipped:
+                  type: boolean
+                  description: "Indicates if the survey was skipped."
+                  example: false
+              required:
+                - surveyId
+
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+
   /user/profile:
     get:
       description: Profile

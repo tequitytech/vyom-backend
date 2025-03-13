@@ -7,6 +7,7 @@ import chapterRoutes from "../src/apis/chapters/chapters.router";
 import pageRoutes from "../src/apis/pages/pages.router";
 import journeyRoutes from "../src/apis/journeys/journey.router";
 import onboardingRoutes from "../src/apis/onboarding/onboarding.router";
+import surveyRoutes from "../src/apis/survey/survey.router";
 
 const routes = express.Router();
 
@@ -19,5 +20,6 @@ routes.use("/chapters", chapterRoutes);
 routes.use("/pages", pageRoutes);
 routes.use("/journey", journeyRoutes);
 routes.use("/onboarding", onboardingRoutes);
+routes.use("/surveys", surveyRoutes);
 
 module.exports = routes;
